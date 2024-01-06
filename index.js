@@ -18,7 +18,7 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-    console.log(`User Connected: ${socket.id}`);
+    console.log(`Connected User ID: ${socket.id}`);
 
     socket.on('join_channelToken', (data) => {
         console.log(`User Joined Token: ${data}`);
@@ -27,7 +27,6 @@ io.on('connection', (socket) => {
 
     socket.on('send_message', (data) => {
         console.log(`User Sent Message: ${data.message}`);
-        
         socket.to(data.channelToken).emit('receive_message', data);
     });
 });
