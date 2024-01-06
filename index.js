@@ -27,6 +27,7 @@ io.on('connection', (socket) => {
 
     socket.on('send_message', (data) => {
         console.log(`User Sent Message: ${data.message}`);
+        
         socket.to(data.channelToken).emit('receive_message', data);
     });
 });
