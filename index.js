@@ -59,6 +59,7 @@ io.on('connection', (socket) => {
     socket.on('user_enqueue_or_dequeue',(data)=>{
         socket.to(data.channelToken).emit('receive_user_enqueue_or_dequeue',data.status)
     });
+    
 });
 
 server.listen(PORT, () => {
