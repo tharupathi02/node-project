@@ -26,8 +26,38 @@ io.on('connection', (socket) => {
     });
 
     socket.on('send_message', (data) => {
-        console.log(`User Sent Message: ${data.message}`);
+        console.log(`User Sent Message: ${data.message} to Token: ${data.channelToken}`);
         socket.to(data.channelToken).emit('receive_message', data);
+    });
+
+    socket.on('face_verification_success',(data)=>{
+        console.log("face_verification_success")
+        socket.to(data.channelToken).emit('face_verification',data.status);
+    });
+
+    socket.on('face_verification_failed',(data)=>{
+        console.log("face_verification_failed")
+        socket.to(data.channelToken).emit('face_verification',data.status);
+    });
+
+    socket.on('capture_selfie_success',(data)=>{
+        socket.to(data.channelToken).emit('capture_selfie',data.status);
+    });
+
+    socket.on('capture_selfie_failed',(data)=>{
+        socket.to(data.channelToken).emit('capture_selfie',data.status);
+    });
+
+    socket.on('capture_pictures_of_ID_success',(data)=>{
+        socket.to(data.channelToken).emit('capture_pictures_of_ID',data.status);
+    });
+
+    socket.on('capture_pictures_of_ID_failed',(data)=>{
+        socket.to(data.channelToken).emit('capture_pictures_of_ID',data.status);
+    });
+
+    socket.on('user_enqueue_or_dequeue',(data)=>{
+        socket.to(data.channelToken).emit('receive_user_enqueue_or_dequeue',data.status)
     });
 });
 
